@@ -9,9 +9,7 @@ const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const St = imports.gi.St;
 
-const XELEVEN = "X11";
-const WAYLAND = "Wayland";
-const ERROR = "ERROR";
+const ERROR = 'ERROR';
 
 let WaylandOrX11 = GObject.registerClass(
     class WaylandOrX11 extends PanelMenu.Button {
@@ -33,9 +31,23 @@ let WaylandOrX11 = GObject.registerClass(
             this.enable();
         }
 
+        checkWindowSystem() {
+            let command_array = ['printenv', 'XDG_SESSION_TYPE'];
+            let [, out] = GLib.spawn_sync(null, command_array, null, GLib.SpawnFlags.SEARCH_PATH, null);
+            // TODO switch to icons: https://github.com/win0err/gnome-runcat/blob/master/src/iconProvider.js
+
+            if (out == null) {
+                this.log_this("Error executing " + command_array.join(' '));
+            }
+            else {
+                this.state = out.toString().slice(0, -1);
+            }
+            
+        }
+
 
         enable() {
-            this.state = WAYLAND;
+            this.checkWindowSystem();
             this.timeText.set_text(this.state);
             this.log_this('Enabled. Window system: ' + this.state);
         }
