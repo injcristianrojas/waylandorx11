@@ -1,0 +1,10 @@
+{
+    "name": "WaylandOrX11",
+    "description": "Am I using Wayland or X11?",
+    "url": "https://github.com/injcristianrojas/UTCClock",
+    "uuid": "waylandorx11@injcristianrojas.github.com",
+    "settings-schema": "org.gnome.shell.extensions.waylandorx11",
+    "gettext-domain": "WaylandOrX11",
+    "shell-version": ["40", "41", "42"],
+    "version": "1"
+}
