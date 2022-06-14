@@ -58,7 +58,7 @@ function init() {
 
 function enable() {
     waylandorx11 = new WaylandOrX11();
-    Main.panel._addToPanelBox('waylandorx11', waylandorx11, 2, Main.panel._centerBox);
+    Main.panel._addToPanelBox('waylandorx11', waylandorx11, 0, Main.panel._rightBox);
 }
 
 function disable() {
