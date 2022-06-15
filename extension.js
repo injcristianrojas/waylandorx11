@@ -3,12 +3,13 @@
 const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
-const ExtensionUtils = imports.misc.extensionUtils;
+const Meta = imports.gi.Meta;
+const St = imports.gi.St;
 const GObject = imports.gi.GObject;
-const Me = ExtensionUtils.getCurrentExtension();
+const ExtensionUtils = imports.misc.extensionUtils;
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
-const St = imports.gi.St;
+const Me = ExtensionUtils.getCurrentExtension();
 
 const ERROR = 'error';
 
@@ -25,21 +26,13 @@ let WaylandOrX11 = GObject.registerClass(
             this.enable();
         }
 
-        checkWindowSystem() {
-            let command_array = ['printenv', 'XDG_SESSION_TYPE'];
-            let [, out] = GLib.spawn_sync(null, command_array, null, GLib.SpawnFlags.SEARCH_PATH, null);
-            if (out == null) {
-                this.log_this("Error executing " + command_array.join(' '));
-            }
-            else {
-                this.state = out.toString().slice(0, -1);
-                this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);
-            }
-            
+        setWindowSystemIcon() {
+            this.state = Meta.is_wayland_compositor() ? 'wayland' : 'x11';
+            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);            
         }
 
         enable() {
-            this.checkWindowSystem();
+            this.setWindowSystemIcon();
         }
 
         disable() {
