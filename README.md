@@ -23,7 +23,8 @@ Wayland:
 
 ### Automatic
 
-GNOME Extensions URL will be announced soon.
+Go to https://extensions.gnome.org/extension/5149/wayland-or-x11/ and turn on
+the extension.
 
 ### Manual
 
