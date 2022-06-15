@@ -2,6 +2,7 @@
 
 const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const ExtensionUtils = imports.misc.extensionUtils;
 const GObject = imports.gi.GObject;
 const Me = ExtensionUtils.getCurrentExtension();
@@ -9,46 +10,36 @@ const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const St = imports.gi.St;
 
-const ERROR = 'ERROR';
+const ERROR = 'error';
 
 let WaylandOrX11 = GObject.registerClass(
     class WaylandOrX11 extends PanelMenu.Button {
 
         _init() {
             super._init(0, 'WaylandOrX11', false);
-
-            // Label
-            this.timeText = new St.Label({
-                y_align: Clutter.ActorAlign.CENTER
+            this._icon = new St.Icon({
+                style_class: 'system-status-icon',
             });
-
-            let topBox = new St.BoxLayout();
-            topBox.add_actor(this.timeText);
-            this.add_actor(topBox);
-
+            this.add_actor(this._icon);
             this.state = ERROR;
-
             this.enable();
         }
 
         checkWindowSystem() {
             let command_array = ['printenv', 'XDG_SESSION_TYPE'];
             let [, out] = GLib.spawn_sync(null, command_array, null, GLib.SpawnFlags.SEARCH_PATH, null);
-            // TODO switch to icons: https://github.com/win0err/gnome-runcat/blob/master/src/iconProvider.js
-
             if (out == null) {
                 this.log_this("Error executing " + command_array.join(' '));
             }
             else {
                 this.state = out.toString().slice(0, -1);
+                this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);
             }
             
         }
 
-
         enable() {
             this.checkWindowSystem();
-            this.timeText.set_text(this.state);
             this.log_this('Enabled. Window system: ' + this.state);
         }
 
@@ -57,7 +48,7 @@ let WaylandOrX11 = GObject.registerClass(
         }
 
         log_this(string) {
-            log(`[${Me.metadata.name}-${Me.metadata.version}] ${string}`);
+            log(`[${Me.metadata.name} v${Me.metadata.version}] ${string}`);
         }
     }
 );
