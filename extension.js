@@ -40,11 +40,10 @@ let WaylandOrX11 = GObject.registerClass(
 
         enable() {
             this.checkWindowSystem();
-            this.log_this('Enabled. Window system: ' + this.state);
         }
 
         disable() {
-            this.log_this('Disabled.');
+            // Intentional
         }
 
         log_this(string) {
