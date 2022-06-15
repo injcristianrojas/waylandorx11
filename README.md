@@ -19,8 +19,6 @@ Wayland:
 
 ![X11](img/wayland.png)
 
-
-
 ## Install
 
 ### Automatic
