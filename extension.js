@@ -23,7 +23,7 @@ let WaylandOrX11 = GObject.registerClass(
 
         setWindowSystemIcon() {
             this.state = Meta.is_wayland_compositor() ? 'wayland' : 'x11';
-            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);            
+            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);
         }
 
         enable() {
