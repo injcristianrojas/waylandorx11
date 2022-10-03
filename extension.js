@@ -14,7 +14,7 @@ let WaylandOrX11 = GObject.registerClass(
         _init() {
             super._init(0, 'WaylandOrX11', false);
             this._icon = new St.Icon({
-                style_class: 'windower-icon',
+                style_class: 'system-status-icon',
             });
             this.add_actor(this._icon);
             this.state = ERROR;
