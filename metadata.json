@@ -3,6 +3,9 @@
     "description": "Am I using Wayland or X11?",
     "url": "https://github.com/injcristianrojas/waylandorx11",
     "uuid": "waylandorx11@injcristianrojas.github.com",
+    "donations": {
+        "paypal": "injcristianrojas"
+    },
     "shell-version": ["40", "41", "42", "43", "44"],
-    "version": "9"
+    "version": "10"
 }
