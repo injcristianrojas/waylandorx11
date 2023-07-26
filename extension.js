@@ -1,6 +1,6 @@
 'use strict';
 
-const { Clutter, GLib, Gio, Meta, St, GObject } = imports.gi;
+const { Gio, Meta, St, GObject } = imports.gi;
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const ExtensionUtils = imports.misc.extensionUtils;
