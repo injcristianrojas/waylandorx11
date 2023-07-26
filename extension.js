@@ -16,6 +16,7 @@ let WaylandOrX11 = GObject.registerClass(
                 style_class: 'system-status-icon windower-icon',
             });
             this.add_actor(this._icon);
+            this.set_track_hover(false);
             this.state = ERROR;
             this.enable();
         }
