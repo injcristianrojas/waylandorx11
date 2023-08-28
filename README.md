@@ -40,4 +40,5 @@ Restart GNOME and you should see the corresponding window manager icon.
 
 ## Support
 
-This extension works on GNOME versions 40 and up.
+This extension works on GNOME versions 45 and up. If you need legacy
+support (GNOME versions 40-44), switch to the `gnome_40_44` branch.
