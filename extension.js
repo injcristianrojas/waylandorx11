@@ -42,7 +42,7 @@ const WaylandOrX11 = GObject.registerClass(
         }
 
         log_this(string) {
-            log(`[${metadata.name} - v${metadata.version}] ${string}`);
+            console.log(`[${metadata.name} - v${metadata.version}] ${string}`);
         }
     }
 );
