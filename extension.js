@@ -12,6 +12,7 @@ import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 const ERROR = 'error';
 let waylandorx11;
 export let extPath;
+export let metadata;
 
 const WaylandOrX11 = GObject.registerClass(
     class WaylandOrX11 extends PanelMenu.Button {
@@ -41,7 +42,7 @@ const WaylandOrX11 = GObject.registerClass(
         }
 
         log_this(string) {
-            log(`[${Me.metadata.name} - v${Me.metadata.version}] ${string}`);
+            log(`[${metadata.name} - v${metadata.version}] ${string}`);
         }
     }
 );
@@ -50,6 +51,7 @@ export default class WaylandOrX11Extension extends Extension {
 
     enable() {
         extPath = this.path;
+        metadata = this.metadata;
         waylandorx11 = new WaylandOrX11();
         Main.panel._addToPanelBox('waylandorx11', waylandorx11, 0, Main.panel._rightBox);
     }
