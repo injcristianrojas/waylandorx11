@@ -1,13 +1,19 @@
 'use strict';
 
-const { Gio, Meta, St, GObject } = imports.gi;
-const Main = imports.ui.main;
-const PanelMenu = imports.ui.panelMenu;
-const Me = imports.misc.extensionUtils.getCurrentExtension();
+import Gio from 'gi://Gio';
+import Meta from 'gi://Meta';
+import St from 'gi://St';
+import GObject from 'gi://GObject';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
+
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 const ERROR = 'error';
+let waylandorx11;
+export let extPath;
 
-let WaylandOrX11 = GObject.registerClass(
+const WaylandOrX11 = GObject.registerClass(
     class WaylandOrX11 extends PanelMenu.Button {
 
         _init() {
@@ -23,7 +29,7 @@ let WaylandOrX11 = GObject.registerClass(
 
         setWindowSystemIcon() {
             this.state = Meta.is_wayland_compositor() ? 'wayland' : 'x11';
-            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${this.state}.svg`);
+            this._icon.gicon = Gio.icon_new_for_string(`${extPath}/icons/${this.state}.svg`);
         }
 
         enable() {
@@ -40,19 +46,19 @@ let WaylandOrX11 = GObject.registerClass(
     }
 );
 
-let waylandorx11;
+export default class WaylandOrX11Extension extends Extension {
 
-function init() {
-    // Intentional
+    enable() {
+        extPath = this.path;
+        waylandorx11 = new WaylandOrX11();
+        Main.panel._addToPanelBox('waylandorx11', waylandorx11, 0, Main.panel._rightBox);
+    }
+
+    disable() {
+        waylandorx11.disable();
+        waylandorx11.destroy();
+        waylandorx11 = null;
+    }
+
 }
 
-function enable() {
-    waylandorx11 = new WaylandOrX11();
-    Main.panel._addToPanelBox('waylandorx11', waylandorx11, 0, Main.panel._rightBox);
-}
-
-function disable() {
-    waylandorx11.disable();
-    waylandorx11.destroy();
-    waylandorx11 = null;
-}
