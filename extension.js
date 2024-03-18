@@ -1,9 +1,10 @@
 'use strict';
 
+import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import St from 'gi://St';
-import GObject from 'gi://GObject';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 
@@ -22,7 +23,11 @@ const WaylandOrX11 = GObject.registerClass(
             this._icon = new St.Icon({
                 style_class: 'system-status-icon windower-icon',
             });
-            this.add_actor(this._icon);
+            if (Clutter.Container === undefined) {
+                console.log('No Clutter Container');
+            } else {
+                this.add_actor(this._icon);
+            }
             this.set_track_hover(false);
             this.state = ERROR;
             this.enable();
