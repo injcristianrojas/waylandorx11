@@ -24,7 +24,7 @@ const WaylandOrX11 = GObject.registerClass(
                 style_class: 'system-status-icon windower-icon',
             });
             if (Clutter.Container === undefined) {
-                console.log('No Clutter Container');
+                this.add_child(this._icon)
             } else {
                 this.add_actor(this._icon);
             }
