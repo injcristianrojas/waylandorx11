@@ -1,5 +1,8 @@
 # Am I using Wayland or X11?
 
+UPDATE (July 2024): All distros seem to be sunsetting the use of X11, and Wayland
+support has been improving in meeting applications. Archiving this repo.
+
 ## Intro: The use case
 
 Fedora 36 was launched on may 2022. It included full Wayland support. But some
