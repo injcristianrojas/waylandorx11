@@ -1,7 +1,11 @@
 # Am I using Wayland or X11?
 
-UPDATE (July 2024): All distros seem to be sunsetting the use of X11, and Wayland
-support has been improving in meeting applications. Archiving this repo.
+## Extra: EOL Policy (October 2024)
+
+Since all distros seem to be sunsetting the use of X11, and Wayland
+support has been improving in meeting applications, I won't be making any more
+updates to this code (there's no need anyway) other than upgrading versions,
+until January 2026.
 
 ## Intro: The use case
 
